@@ -36,9 +36,9 @@ jobs:
             git clone --branch main  https://$GITHUB_TOKEN@github.com/ZunairaSadia/CircleCi-demo.git 
             cd CircleCi-demo
             
-            git add .
-            git commit -m "Deploy updates"
-            git push https://$GITHUB_TOKEN@github.com/ZunairaSadia/CircleCi-demo.git 
+            # git add .
+            # git commit -m "Deploy updates"
+            # git push https://$GITHUB_TOKEN@github.com/ZunairaSadia/CircleCi-demo.git 
 
 workflows:
   version: 2
