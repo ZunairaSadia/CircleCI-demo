@@ -1,0 +1,52 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: Run tests
+          command: echo 'No tests available for HTML project'
+
+  build:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: Build HTML project
+          command: |
+            echo 'Building HTML project'
+            mkdir -p build
+            cp -r * build/
+
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: Deploy to GitHub Pages
+          command: |
+            git config --global user.email "zunaira@izylogic.com"
+            git config --global user.name "ZunairaSadia"
+            git clone --branch gh-pages https://$GITHUB_TOKEN@github.com/ZunairaSadia/CircleCi-demo.git gh-pages
+            cd gh-pages
+            cp -r ../build/* .
+            git add .
+            git commit -m "Deploy updates"
+            git push https://$GITHUB_TOKEN@github.com/your-username/your-repo.git gh-pages
+
+workflows:
+  version: 2
+  example:
+    jobs:
+      - test
+      - build:
+          requires:
+            - test
+      - deploy:
+          requires:
+            - build
