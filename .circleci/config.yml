@@ -21,7 +21,7 @@ jobs:
             echo 'Building HTML project'
             mkdir -p build
             cp -r * build/
-             rm -rf build/build # Ensure no recursive copy
+             rm -rf deploy/.git
 
   deploy:
     docker:
@@ -34,8 +34,9 @@ jobs:
             git config --global user.email "zunaira@izylogic.com"
             git config --global user.name "ZunairaSadia"
             git clone --branch gh-pages https://$GITHUB_TOKEN@github.com/ZunairaSadia/CircleCi-demo.git gh-pages
+            cp -r deploy/* gh-pages/
             cd gh-pages
-             cp -r build/* gh-pages/
+            
             git add .
             git commit -m "Deploy updates"
             git push https://$GITHUB_TOKEN@github.com/ZunairaSadia/CircleCi-demo.git gh-pages
