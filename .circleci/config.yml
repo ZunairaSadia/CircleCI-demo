@@ -35,7 +35,7 @@ jobs:
             git config --global user.name "ZunairaSadia"
             git clone --branch main  https://$GITHUB_TOKEN@github.com/ZunairaSadia/CircleCi-demo.git 
             cd CircleCi-demo
-            cp -r deploy/* .
+            
             git add .
             git commit -m "Deploy updates"
             git push https://$GITHUB_TOKEN@github.com/ZunairaSadia/CircleCi-demo.git 
