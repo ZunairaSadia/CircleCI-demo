@@ -15,10 +15,13 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      - run: index.html
-         
-           
-           
+      - run:
+          name: Prepare for Deployment
+          command: |
+            echo 'Preparing for deployment'
+            mkdir -p deploy
+            cp -r * deploy/
+            rm -rf deploy/.git
 
   deploy:
     docker:
@@ -30,13 +33,12 @@ jobs:
           command: |
             git config --global user.email "zunaira@izylogic.com"
             git config --global user.name "ZunairaSadia"
-            git clone --branch gh-pages https://$GITHUB_TOKEN@github.com/ZunairaSadia/CircleCi-demo.git gh-pages
-            cp -r deploy/* gh-pages/
-            cd gh-pages
-            
+            git clone --branch gh-pages https://$GITHUB_TOKEN@github.com/ZunairaSadia/CircleCi-demo.git 
+            cd CircleCi.demo
+            cp -r deploy/* .
             git add .
             git commit -m "Deploy updates"
-            git push https://$GITHUB_TOKEN@github.com/ZunairaSadia/CircleCi-demo.git gh-pages
+            git push https://$GITHUB_TOKEN@github.com/ZunairaSadia/CircleCi-demo.git 
 
 workflows:
   version: 2
