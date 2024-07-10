@@ -33,7 +33,7 @@ jobs:
           command: |
             git config --global user.email "zunaira@izylogic.com"
             git config --global user.name "ZunairaSadia"
-            git clone --branch gh-pages https://$GITHUB_TOKEN@github.com/ZunairaSadia/CircleCi-demo.git 
+            git clone --branch main  https://$GITHUB_TOKEN@github.com/ZunairaSadia/CircleCi-demo.git 
             cd CircleCi.demo
             cp -r deploy/* .
             git add .
