@@ -32,8 +32,8 @@ jobs:
       - run:
           name: Deploy to S3
           command: |
-            aws s3 sync ./ s3://democircleci --delete
-            
+            aws s3 sync ./ s3://democircleci 
+
 
 workflows:
   version: 2
