@@ -10,7 +10,7 @@ jobs:
           name: Run tests
           command: echo 'No tests available for HTML project'
 
-   build:
+  build:
     docker:
       - image: cimg/base:stable
     steps:
@@ -22,16 +22,14 @@ jobs:
             # Check if src directory exists, create if it doesn't
             if [ ! -d "src" ]; then
               mkdir src
-              # Optionally, you can echo a message indicating the directory was created
               echo "Created 'src' directory."
             fi
-            
-            # Now copy files from src to deploy
             cp -R src/* deploy/
+
            
            
 
-  deploy:
+ deploy:
     docker:
       - image: cimg/base:stable
     steps:
@@ -53,8 +51,7 @@ jobs:
       - run:
           name: Deploy to S3
           command: |
-           aws s3 sync deploy/ s3://democircleci --delete
-
+            aws s3 sync deploy/ s3://democircleci --delete
 
 workflows:
   version: 2
