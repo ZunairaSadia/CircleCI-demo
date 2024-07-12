@@ -10,12 +10,12 @@ jobs:
           name: Run tests
           command: echo 'No tests available for HTML project'
 
-  build:
+   build:
     docker:
       - image: cimg/base:stable
     steps:
       - checkout
-     - run:
+      - run:
           name: Prepare for Deployment
           command: |
             echo 'Preparing for deployment'
@@ -28,7 +28,6 @@ jobs:
             
             # Now copy files from src to deploy
             cp -R src/* deploy/
-          
            
            
 
