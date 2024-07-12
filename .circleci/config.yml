@@ -20,6 +20,7 @@ jobs:
           command: |
             echo 'Preparing for deployment'
             mkdir -p deploy
+            cp -R src/* deploy/
            
            
 
@@ -29,16 +30,23 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Deploy to GitHub Pages
+          name: Install AWS CLI
           command: |
-            git config --global user.email "zunaira@izylogic.com"
-            git config --global user.name "ZunairaSadia"
-            git clone --branch main  https://$GITHUB_TOKEN@github.com/ZunairaSadia/CircleCi-demo.git 
-            cd CircleCi-demo
-            
-            # git add .
-            # git commit -m "Deploy updates"
-            # git push https://$GITHUB_TOKEN@github.com/ZunairaSadia/CircleCi-demo.git 
+            apt-get update && \
+            apt-get install -y unzip && \
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+            unzip awscliv2.zip && \
+            ./aws/install
+      - run:
+          name: Configure AWS CLI
+          command: |
+            aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+            aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+            aws configure set region $AWS_DEFAULT_REGION
+      - run:
+          name: Deploy to S3
+          command: |
+            aws s3 sync deploy/ s3://democircleci --delete
 
 workflows:
   version: 2
