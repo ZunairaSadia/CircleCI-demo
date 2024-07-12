@@ -32,7 +32,7 @@ jobs:
       - run:
           name: Deploy to S3
           command: |
-            aws s3 sync ./ s3://democircleci 
+            aws s3 sync ./ s3://democircleci --delete  # Adjust ./dist/ to your actual directory path
 
 workflows:
   version: 2
