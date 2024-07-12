@@ -15,11 +15,18 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      - run:
+     - run:
           name: Prepare for Deployment
           command: |
             echo 'Preparing for deployment'
-            mkdir -p deploy
+            # Check if src directory exists, create if it doesn't
+            if [ ! -d "src" ]; then
+              mkdir src
+              # Optionally, you can echo a message indicating the directory was created
+              echo "Created 'src' directory."
+            fi
+            
+            # Now copy files from src to deploy
             cp -R src/* deploy/
           
            
