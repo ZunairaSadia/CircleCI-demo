@@ -20,7 +20,7 @@ jobs:
           command: |
             echo 'Preparing for deployment'
             mkdir -p deploy
-            cp -R src/* deploy/
+          
            
            
 
