@@ -19,12 +19,19 @@ jobs:
           name: Prepare for Deployment
           command: |
             echo 'Preparing for deployment'
-            # Check if src directory exists, create if it doesn't
+            # Ensure 'src' directory exists or create it
             if [ ! -d "src" ]; then
               mkdir src
               echo "Created 'src' directory."
+              # Optionally, you may add some placeholder files or handle this case as needed
             fi
-            cp -R src/* deploy/
+            # Copy files from 'src' directory to 'deploy/' if 'src' exists
+            if [ -d "src" ]; then
+              cp -R src/* deploy/
+            else
+              echo "'src' directory not found, cannot copy files."
+              # Optionally, exit the build or handle this case as needed
+            fi
 
   deploy:
     docker:
