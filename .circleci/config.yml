@@ -20,6 +20,7 @@ jobs:
           command: |
             echo 'Preparing for deployment'
             mkdir -p deploy
+            cp -R src/* deploy/
           
            
            
@@ -46,7 +47,7 @@ jobs:
       - run:
           name: Deploy to S3
           command: |
-            aws s3 sync  s3://democircleci --delete
+           aws s3 sync deploy/ s3://democircleci --delete
 
 
 workflows:
