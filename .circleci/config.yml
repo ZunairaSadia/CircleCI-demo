@@ -26,10 +26,7 @@ jobs:
             fi
             cp -R src/* deploy/
 
-           
-           
-
- deploy:
+  deploy:
     docker:
       - image: cimg/base:stable
     steps:
