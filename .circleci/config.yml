@@ -34,7 +34,6 @@ jobs:
           command: |
             aws s3 sync ./ s3://democircleci 
 
-
 workflows:
   version: 2
   example:
