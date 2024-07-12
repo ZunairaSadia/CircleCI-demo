@@ -10,29 +10,6 @@ jobs:
           name: Run tests
           command: echo 'No tests available for HTML project'
 
-  build:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout
-      - run:
-          name: Prepare for Deployment
-          command: |
-            echo 'Preparing for deployment'
-            # Ensure 'src' directory exists or create it
-            if [ ! -d "src" ]; then
-              mkdir src
-              echo "Created 'src' directory."
-              # Optionally, you may add some placeholder files or handle this case as needed
-            fi
-            # Copy files from 'src' directory to 'deploy/' if 'src' exists
-            if [ -d "src" ]; then
-              cp -R src/* deploy/
-            else
-              echo "'src' directory not found, cannot copy files."
-              # Optionally, exit the build or handle this case as needed
-            fi
-
   deploy:
     docker:
       - image: cimg/base:stable
@@ -55,16 +32,14 @@ jobs:
       - run:
           name: Deploy to S3
           command: |
-            aws s3 sync deploy/ s3://democircleci --delete
+            # Replace this path with the actual path to your HTML project files
+            aws s3 sync ./path/to/your/html/files s3://democircleci --delete
 
 workflows:
   version: 2
   example:
     jobs:
       - test
-      - build:
-          requires:
-            - test
       - deploy:
           requires:
-            - build
+            - test
