@@ -33,7 +33,7 @@ jobs:
           name: Deploy to S3
           command: |
             # Replace this path with the actual path to your HTML project files
-            aws s3 sync ./path/to/your/html/files s3://democircleci --delete
+           aws s3 sync ./ s3://democircleci --delete
 
 workflows:
   version: 2
