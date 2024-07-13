@@ -32,7 +32,7 @@ jobs:
       - run:
           name: Deploy to S3
           command: |
-            aws s3 sync ./ s3://demo1circleci --delete  --request-payer requester
+            aws s3 sync ./ s3://democircleci --delete  --request-payer requester
 
 workflows:
   version: 2
