@@ -34,7 +34,6 @@ jobs:
           command: |
             aws s3 sync ./ s3://demo1circleci --delete  --request-payer requester
 
-
 workflows:
   version: 2
   example:
